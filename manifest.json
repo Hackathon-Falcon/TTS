@@ -1,0 +1,12 @@
+{
+    "manifest_version": 3,
+    "name": "Japanese TTS",
+    "version": "0.0.1",
+    "description": "A TTS extension for document",
+    "author" : "ichikawa aa Dai JDS",
+    "icons":{
+        "16": "icons/logo.svg",
+        "48": "icons/logo.svg",
+        "128": "icons/logo.svg"
+    }
+}
