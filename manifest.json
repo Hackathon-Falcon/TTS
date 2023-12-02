@@ -1,12 +1,29 @@
 {
-    "manifest_version": 3,
-    "name": "Japanese TTS",
+	"name": "読み上げずんだもん", 
+	"manifest_version": 3,
     "version": "0.0.1",
     "description": "A TTS extension for document",
     "author" : "ichikawa aa Dai JDS",
-    "icons":{
-        "16": "icons/logo.svg",
-        "48": "icons/logo.svg",
-        "128": "icons/logo.svg"
-    }
+	"permissions": ["activeTab","scripting","storage", "contextMenus"],
+	"action": {
+		"default_icon": {
+			"16": "images/zunda744.png",
+			"48": "images/zunda744.png",
+			"128": "images/zunda744.png"
+		},
+		"default_popup": "popup.html"
+	},
+	"background": {
+		"service_worker": "background.js"
+	  },
+	  "content_scripts": [
+		{
+		  "matches": [
+			"<all_urls>"
+		  ],
+		  "js": [
+			"content.js"
+		  ]
+		}
+	  ]
 }
