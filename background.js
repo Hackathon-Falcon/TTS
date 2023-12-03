@@ -1,19 +1,39 @@
-// Retrieve a value from localStorage
-let selectedCharacter = localStorage.getItem('selectedCharacter');
+// ERR
+const BASE_URL = 'http://127.0.0.1:50021';
+const PARSSING_ERR1= new Error('Value not found in localStorage');
+const PARSSING_NULL_ERR= new Error('VALUE IS NULL');
+
+// VALUE
+const ZUNDAMON_VOICE= 1;
+
+// For options
 // let selectedVolume = localStorage.getItem('selectedVolume');
 
-// Check if the value exists
-if (selectedCharacter == null) {
-  console.log('Value not found in localStorage');
-}else{
-  selectedCharacter= 1
+let selectedCharacter = () =>{
+  try{
+    let result= localStorage.getItem('selectedCharacter');
+  }catch{
+    throw PARSSING_ERR1;
+  }
+
+  if (selectedCharacter == null) {
+    throw PARSSING_NULL_ERR;
+  } else {
+    result = ZUNDAMON_VOICE;
+  }
+  
+  return result;
 }
+
+
 
 //クエリを作るapiを叩く関数
 const createQuery = async (inputText) => {
   try {
+    const API_URL = 'audio_query';
+
     const response = await fetch(
-      `http://127.0.0.1:50021/audio_query?text=${inputText}&speaker=${selectedCharacter}`,
+      `${BASE_URL}/${API_URL}?text=${inputText}&speaker=${selectedCharacter()}`,
       {
         method: "POST",
         headers: {
@@ -39,7 +59,8 @@ const createQuery = async (inputText) => {
 //wavを作るapiを叩く関数
 const createVoice = async (queryJson) => {
   try {
-    const response = await fetch(`http://127.0.0.1:50021/synthesis?speaker=${selectedCharacter}`, {
+    let api_url = 'synthesis';
+    const response = await fetch(`${BASE_URL}/${api_url}?speaker=${selectedCharacter}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
