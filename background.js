@@ -3,9 +3,11 @@ let selectedCharacter = localStorage.getItem('selectedCharacter');
 // let selectedVolume = localStorage.getItem('selectedVolume');
 
 // Check if the value exists
-if (storedValue == null) {
+if (selectedCharacter == null) {
   console.log('Value not found in localStorage');
-} 
+}else{
+  selectedCharacter= 1
+}
 
 //クエリを作るapiを叩く関数
 const createQuery = async (inputText) => {
