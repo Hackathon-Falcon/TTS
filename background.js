@@ -58,6 +58,7 @@ const getBlob = async (inputText) => {
     var reader = new FileReader();
     reader.onload = function () {
       const data = reader.result;
+      console.log("data", data);
       chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
         chrome.tabs.sendMessage(tabs[0].id, {
           message: data,
