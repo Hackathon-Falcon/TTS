@@ -1,25 +1,30 @@
-{
-  "name": "読み上げずんだもん",
-  "manifest_version": 3,
-  "version": "0.0.1",
-  "description": "A TTS extension for document",
-  "author": "ichikawa aa Dai JDS",
-  "permissions": ["activeTab", "scripting", "storage", "contextMenus"],
-  "action": {
-    "default_icon": {
-      "16": "images/zunda744.png",
-      "48": "images/zunda744.png",
-      "128": "images/zunda744.png"
-    },
-    "default_popup": "popup.html"
-  },
-  "background": {
-    "service_worker": "background.js"
-  },
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["content.js"]
-    }
-  ]
+
+	"name": "読み上げずんだもん", 
+	"manifest_version": 3,
+    "version": "0.0.1",
+    "description": "A TTS extension for document",
+    "author" : "ichikawa aa Dai JDS",
+	"permissions": ["activeTab","scripting","storage", "contextMenus"],
+	"options_page": "options.html",
+	"action": {
+		"default_icon": {
+			"16": "images/zunda744.png",
+			"48": "images/zunda744.png",
+			"128": "images/zunda744.png"
+		},
+		"default_popup": "popup.html"
+	},
+	"background": {
+		"service_worker": "background.js"
+	  },
+	  "content_scripts": [
+		{
+		  "matches": [
+			"<all_urls>"
+		  ],
+		  "js": [
+			"content.js"
+		  ]
+		}
+	  ]
 }
