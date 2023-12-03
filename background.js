@@ -1,8 +1,17 @@
+// Retrieve a value from localStorage
+let selectedCharacter = localStorage.getItem('selectedCharacter');
+// let selectedVolume = localStorage.getItem('selectedVolume');
+
+// Check if the value exists
+if (storedValue == null) {
+  console.log('Value not found in localStorage');
+} 
+
 //クエリを作るapiを叩く関数
 const createQuery = async (inputText) => {
   try {
     const response = await fetch(
-      `http://127.0.0.1:50021/audio_query?text=${inputText}&speaker=1`,
+      `http://127.0.0.1:50021/audio_query?text=${inputText}&speaker=${selectedCharacter}`,
       {
         method: "POST",
         headers: {
@@ -28,7 +37,7 @@ const createQuery = async (inputText) => {
 //wavを作るapiを叩く関数
 const createVoice = async (queryJson) => {
   try {
-    const response = await fetch("http://127.0.0.1:50021/synthesis?speaker=1", {
+    const response = await fetch(`http://127.0.0.1:50021/synthesis?speaker=${selectedCharacter}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
