@@ -51,7 +51,7 @@
 			{ value: '58', label: '猫使ビィ', word: 'ねこつかびぃです' },
 		];
 	  
-// new
+
 		// Function to generate options dynamically
 		function generateOptions() {
 			const selectElement = document.getElementById('charactersSelect');
@@ -72,8 +72,8 @@
 				selectElement.appendChild(option);
 			});
 
-			// Listen for change event on select element
-			selectElement.addEventListener('change', function(event) {
+				// Listen for change event on select element
+				selectElement.addEventListener('change', function(event) {
 				const selectedValue = event.target.value;
 				// Save the selected value in localStorage
 				localStorage.setItem('selectedCharacter', selectedValue);
