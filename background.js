@@ -1,10 +1,10 @@
 // ERR
-const BASE_URL = 'http://127.0.0.1:50021';
 const PARSSING_ERR1= new Error('Value not found in localStorage');
 const PARSSING_NULL_ERR= new Error('VALUE IS NULL');
 
 // VALUE
 const ZUNDAMON_VOICE= 1;
+const BASE_URL = 'http://127.0.0.1:50021';
 
 // For options
 // let selectedVolume = localStorage.getItem('selectedVolume');
