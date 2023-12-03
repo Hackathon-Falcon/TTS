@@ -5,6 +5,9 @@
   "description": "A TTS extension for document",
   "author": "ichikawa aa Dai JDS",
   "permissions": ["activeTab", "scripting", "storage", "contextMenus"],
+  "icons": {
+	"48": "images/zunda744.png"
+  },
   "options_page": "options.html",
   "action": {
     "default_icon": {
