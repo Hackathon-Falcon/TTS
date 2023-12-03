@@ -80,53 +80,11 @@ chrome.runtime.onInstalled.addListener(function () {
   });
 });
 
-//使ってない
-const doClick = (info, tabId, tabs) => {
-  // コンテンツスクリプトを実行
-  // chrome.tabs.executeScript(tabId, { file: "content.js" });
-
-  // // 必要に応じて、追加のメッセージを content.js に送信
-  // chrome.tabs.sendMessage(tabId, {
-  //   action: "doSomething",
-  //   data: info.selectionText,
-  // });
-
-  // const audio = document.createElement("audio");
-
-  // let selectedText = info.selectedText;
-
-  // var reader = new FileReader();
-  // console.log("wav", tmpBlob);
-  // reader.onload = function () {
-  //   const url = reader.result;
-  //   console.log("url", url);
-
-  //   // 音声ファイルを登録
-  //   const source = audio.appendChild(document.createElement("source"));
-  //   source.setAttribute("src", url);
-  //   audio.appendChild(source);
-  //   document.body.appendChild(audio);
-  // };
-
-  // データの読み込みを開始
-  reader.readAsDataURL(tmpBlob);
-  // });
-};
-
 //コンテキストメニューをクリックした時の処理
 let selectedText = "";
 chrome.contextMenus.onClicked.addListener(function (info, tab, tabId) {
   if (info.menuItemId === "readAloud") {
-    //selectedTextに選択したテキストが入ってない
-    //コピーさせてテキストデータを取得する方法
     selectedText = info.selectionText;
-    var successMessage = "成功しました! : " + selectedText;
-    chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      function: showPopup,
-      args: [successMessage],
-    });
-
     console.log("selectedText", selectedText);
     getBlob(selectedText);
   }
@@ -135,5 +93,3 @@ chrome.contextMenus.onClicked.addListener(function (info, tab, tabId) {
 function showPopup(message) {
   alert(message);
 }
-
-//選択した時点でアイコンだしたい。
