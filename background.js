@@ -50,24 +50,29 @@ const createQuery = async (inputText) => {
 
     const data = await response.json();
     console.log("response1", data);
+    
     return data;
   } catch (error) {
-    console.log("error", error);
+    console.error("error", error.message);
   }
 };
 
 //wavを作るapiを叩く関数
 const createVoice = async (queryJson) => {
   try {
-    let api_url = 'synthesis';
-    const response = await fetch(`${BASE_URL}/${api_url}?speaker=${selectedCharacter}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    const API_URL = 'synthesis';
+
+    const response = await fetch(
+      `${BASE_URL}/${API_URL}?speaker=${selectedCharacter}`, 
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
       },
+
       body: JSON.stringify(queryJson),
     }).catch((error) => {
-      console.error("Error creating voice:", error);
+      console.error("Error creating voice:", error.message);
     });
 
     if (!response.ok) {
@@ -76,9 +81,10 @@ const createVoice = async (queryJson) => {
 
     const data = await response.blob();
     console.log("response2", data);
+    
     return data;
   } catch (error) {
-    console.error("Error creating voice:", error);
+    console.error("Error creating voice:", error.message);
   }
 };
 
@@ -99,7 +105,7 @@ const getBlob = async (inputText) => {
     };
     reader.readAsDataURL(tmpBlob);
   } catch (error) {
-    console.error("Error getting wave:", error);
+    console.error("Error getting wave:", error.message);
   }
 };
 
