@@ -10,6 +10,8 @@ chrome.runtime.onMessage.addListener(function (message) {
 
   // 起動時以外のタイミングでplayを実行しないとエラーが起きるので関数を分けておく
   function play() {
+
+    
     // 音声再生
     audio
       .play()
@@ -27,6 +29,5 @@ chrome.runtime.onMessage.addListener(function (message) {
       });
   }
   play();
-  console.log(MSG);
   return true;
 });

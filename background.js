@@ -4,7 +4,8 @@ const PARSSING_NULL_ERR= new Error('VALUE IS NULL');
 
 // VALUE
 const ZUNDAMON_VOICE= 1;
-const BASE_URL = 'http://127.0.0.1:50021';
+// const BASE_URL = 'http://127.0.0.1:50021';
+const BASE_URL= `https://e1a5-218-38-158-181.ngrok-free.app`;
 
 // For options
 // let selectedVolume = localStorage.getItem('selectedVolume');
