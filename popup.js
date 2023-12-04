@@ -62,6 +62,7 @@ function generateOptions() {
 		const selectedValue = event.target.value;
 		// Save the selected value in localStorage
 		localStorage.setItem('selectedCharacter', selectedValue);
+		
 	});
 }
 

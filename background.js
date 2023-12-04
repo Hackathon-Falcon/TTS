@@ -1,27 +1,23 @@
-// ERR
-const PARSSING_ERR1= new Error('Value not found in localStorage');
-const PARSSING_NULL_ERR= new Error('VALUE IS NULL');
-
 // VALUE
 const ZUNDAMON_VOICE= 1;
 // const BASE_URL = 'http://127.0.0.1:50021';
-const BASE_URL= `https://e1a5-218-38-158-181.ngrok-free.app`;
+const BASE_URL= `https://e1a5-218-38-158-181.ngrok-free.app `;
 
 // For options
 // let selectedVolume = localStorage.getItem('selectedVolume');
 
 let selectedCharacter = () =>{
-  try{
-    let result= localStorage.getItem('selectedCharacter');
-  }catch{
-    throw PARSSING_ERR1;
-  }
-
-  if (selectedCharacter == null) {
-    throw PARSSING_NULL_ERR;
-  } else {
-    result = ZUNDAMON_VOICE;
-  }
+  let result;
+  
+  // try{
+  //   result= localStorage.getItem('selectedCharacter');
+  // }catch{
+  //   throw new Error('Value not found in localStorage');
+  // }finally{
+  //   result = ZUNDAMON_VOICE
+  // }
+  
+  result= ZUNDAMON_VOICE;
   
   return result;
 }
