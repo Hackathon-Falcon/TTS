@@ -1,36 +1,34 @@
 // VALUE
-const ZUNDAMON_VOICE= 1;
-// const BASE_URL = 'http://127.0.0.1:50021';
-const BASE_URL= `https://1c37-218-38-158-181.ngrok-free.app`;
+const ZUNDAMON_VOICE = 1;
+const BASE_URL = "http://127.0.0.1:50021";
+// const BASE_URL= `https://1c37-218-38-158-181.ngrok-free.app`;
 
 // For options
 // let selectedVolume = localStorage.getItem('selectedVolume');
 
-let selectedCharacter = () =>{
-  let result;
-  
-  // try{
-  //   result= localStorage.getItem('selectedCharacter');
-  // }catch{
-  //   throw new Error('Value not found in localStorage');
-  // }finally{
-  //   result = ZUNDAMON_VOICE
-  // }
-  
-  result= ZUNDAMON_VOICE;
-  
-  return result;
-}
+// let selectedCharacter = () =>{
+//   let result;
 
+//   // try{
+//   //   result= localStorage.getItem('selectedCharacter');
+//   // }catch{
+//   //   throw new Error('Value not found in localStorage');
+//   // }finally{
+//   //   result = ZUNDAMON_VOICE
+//   // }
 
+//   result= ZUNDAMON_VOICE;
+
+//   return result;
+// }
 
 //クエリを作るapiを叩く関数
-const createQuery = async (inputText) => {
+const createQuery = async (inputText, selectedCharacter) => {
   try {
-    const API_URL = 'audio_query';
+    const API_URL = "audio_query";
 
     const response = await fetch(
-      `${BASE_URL}/${API_URL}?text=${inputText}&speaker=${selectedCharacter()}`,
+      `${BASE_URL}/${API_URL}?text=${inputText}&speaker=${selectedCharacter}`,
       {
         method: "POST",
         headers: {
@@ -47,7 +45,7 @@ const createQuery = async (inputText) => {
 
     const data = await response.json();
     console.log("response1", data);
-    
+
     return data;
   } catch (error) {
     console.error("error", error);
@@ -55,20 +53,21 @@ const createQuery = async (inputText) => {
 };
 
 //wavを作るapiを叩く関数
-const createVoice = async (queryJson) => {
+const createVoice = async (queryJson, selectedCharacter) => {
   try {
-    const API_URL = 'synthesis';
+    const API_URL = "synthesis";
 
     const response = await fetch(
-      `${BASE_URL}/${API_URL}?speaker=${selectedCharacter()}`, 
+      `${BASE_URL}/${API_URL}?speaker=${selectedCharacter}`,
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-      },
+        },
 
-      body: JSON.stringify(queryJson),
-    }).catch((error) => {
+        body: JSON.stringify(queryJson),
+      }
+    ).catch((error) => {
       console.error("Error creating voice:", error);
     });
 
@@ -78,7 +77,7 @@ const createVoice = async (queryJson) => {
 
     const data = await response.blob();
     console.log("response2", data);
-    
+
     return data;
   } catch (error) {
     console.error("Error creating voice:", error);
@@ -86,10 +85,10 @@ const createVoice = async (queryJson) => {
 };
 
 //wavを取得する関数
-const getBlob = async (inputText) => {
+const getBlob = async (inputText, selectedCharacter) => {
   try {
-    const queryJson = await createQuery(inputText);
-    const tmpBlob = await createVoice(queryJson);
+    const queryJson = await createQuery(inputText, selectedCharacter);
+    const tmpBlob = await createVoice(queryJson, selectedCharacter);
     var reader = new FileReader();
     reader.onload = function () {
       const data = reader.result;
@@ -115,13 +114,26 @@ chrome.runtime.onInstalled.addListener(function () {
   });
 });
 
+let selectedCharacter = ZUNDAMON_VOICE;
+chrome.runtime.onMessage.addListener(function (message) {
+  if (message.type == "changeCharacter") {
+    console.log("呼ばれた");
+    console.log("message.value typeof", typeof message.value);
+    console.log("message.value", message.value);
+    selectedCharacter = message.value;
+  }
+});
+
 //コンテキストメニューをクリックした時の処理
 let selectedText = "";
 chrome.contextMenus.onClicked.addListener(function (info, tab, tabId) {
   if (info.menuItemId === "readAloud") {
+    console.log("info", info);
+
     selectedText = info.selectionText;
     console.log("selectedText", selectedText);
-    getBlob(selectedText);
+    getBlob(selectedText, selectedCharacter);
+    return true;
   }
 });
 
