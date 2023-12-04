@@ -53,7 +53,7 @@ const createQuery = async (inputText) => {
     
     return data;
   } catch (error) {
-    console.error("error", error.message);
+    console.error("error", error);
   }
 };
 
@@ -63,7 +63,7 @@ const createVoice = async (queryJson) => {
     const API_URL = 'synthesis';
 
     const response = await fetch(
-      `${BASE_URL}/${API_URL}?speaker=${selectedCharacter}`, 
+      `${BASE_URL}/${API_URL}?speaker=${selectedCharacter()}`, 
       {
         method: "POST",
         headers: {
@@ -72,7 +72,7 @@ const createVoice = async (queryJson) => {
 
       body: JSON.stringify(queryJson),
     }).catch((error) => {
-      console.error("Error creating voice:", error.message);
+      console.error("Error creating voice:", error);
     });
 
     if (!response.ok) {
@@ -84,7 +84,7 @@ const createVoice = async (queryJson) => {
     
     return data;
   } catch (error) {
-    console.error("Error creating voice:", error.message);
+    console.error("Error creating voice:", error);
   }
 };
 
@@ -105,7 +105,7 @@ const getBlob = async (inputText) => {
     };
     reader.readAsDataURL(tmpBlob);
   } catch (error) {
-    console.error("Error getting wave:", error.message);
+    console.error("Error getting wave:", error);
   }
 };
 
