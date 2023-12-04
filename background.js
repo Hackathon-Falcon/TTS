@@ -1,26 +1,7 @@
 // VALUE
 const ZUNDAMON_VOICE = 1;
-const BASE_URL = "http://127.0.0.1:50021";
-// const BASE_URL= `https://1c37-218-38-158-181.ngrok-free.app`;
-
-// For options
-// let selectedVolume = localStorage.getItem('selectedVolume');
-
-// let selectedCharacter = () =>{
-//   let result;
-
-//   // try{
-//   //   result= localStorage.getItem('selectedCharacter');
-//   // }catch{
-//   //   throw new Error('Value not found in localStorage');
-//   // }finally{
-//   //   result = ZUNDAMON_VOICE
-//   // }
-
-//   result= ZUNDAMON_VOICE;
-
-//   return result;
-// }
+// const BASE_URL = "http://127.0.0.1:50021";
+const BASE_URL = 'http://218.38.158.181:50021';
 
 //クエリを作るapiを叩く関数
 const createQuery = async (inputText, selectedCharacter) => {
