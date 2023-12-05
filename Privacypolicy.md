@@ -3,13 +3,15 @@
 Privacy Policy of Falcon
 ========================
 
-well, I will not collect User data.
+```
+well, we will not collect User data.
 
 We are not your parents.
 
 We are not a profit organization.
 
 We Just work for KAWAII.
+```
 
 Falcon operates the https://github.com/Hackathon-Falcon/TTS website, which provides the SERVICE.
 
