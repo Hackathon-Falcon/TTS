@@ -1,8 +1,7 @@
 // VALUE
 const ZUNDAMON_VOICE = 1;
-const BASE_URL = "http://127.0.0.1:50021";
-// const BASE_URL = 'http://218.38.158.181:50021';
-// const BASE_URL = `https://45dd-218-38-158-181.ngrok-free.app`;
+// const BASE_URL = "http://127.0.0.1:50021";
+const BASE_URL = `https://zundamon.ngrok.io`;
 
 //クエリを作るapiを叩く関数
 const createQuery = async (inputText, selectedCharacter) => {
