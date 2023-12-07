@@ -5,3 +5,6 @@
 
 ## Webサイトの環境によっては、音声が再生されない場合があります。（音が鳴らないWebサイトもあります）
 ## The sound may not play, depending on the website environment. (Some websites do not play.)
+
+## Chrome拡張機能を追加 //Add chrome extension
+https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world
