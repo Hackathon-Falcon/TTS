@@ -4,28 +4,50 @@ const ZUNDAMON_VOICE = 1;
 const BASE_URL = `https://zundamon.ngrok.io`;
 
 //クエリを作るapiを叩く関数
-const createQuery = async (inputText, selectedCharacter) => {
+const createQuery = async (inputTexts, selectedCharacter) => {
   try {
     const API_URL = "audio_query";
 
-    const response = await fetch(
-      `${BASE_URL}/${API_URL}?text=${inputText}&speaker=${selectedCharacter}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+    const TXT_RIMIT = 150;
+    let text = "";
+    let inputTexts = [];
+  
+    let len = inputText.length;
+    if (len > TXT_RIMIT) {
+      for (let i = 0; i <= len; i++) {
+  
+        text += inputText[i];
+        if (i % TXT_RIMIT == 0) {
+          inputTexts.push(text);
+          text = "";
+        }
       }
-    ).catch((error) => {
-      console.error("Error creating voice:", error);
-    });
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+    } else {
+      inputTexts.push(inputText);
     }
 
-    const data = await response.json();
-    console.log("response1", data);
+    for(let i=0; i<inputTexts.length; i++){
+      const response = await fetch(
+        `${BASE_URL}/${API_URL}?text=${inputTexts[i]}&speaker=${selectedCharacter}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      ).catch((error) => {
+        console.error("Error creating voice:", error);
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+  
+      let data= [];
+      data.push(await response.json()); 
+      console.log("response1", data);
+    }
 
     return data;
   } catch (error) {
@@ -68,8 +90,13 @@ const createVoice = async (queryJson, selectedCharacter) => {
 //wavを取得する関数
 const getBlob = async (inputText, selectedCharacter) => {
   try {
-    const queryJson = await createQuery(inputText, selectedCharacter);
-    const tmpBlob = await createVoice(queryJson, selectedCharacter);
+    const queryJsons = await createQuery(inputText, selectedCharacter);
+
+    let tmpBlobs= [];
+    for(let i=0; i< queryJsons.length; i++){
+      tmpBlobs.push(await createVoice(queryJsons[i], selectedCharacter));
+    }
+
     var reader = new FileReader();
     reader.onload = function () {
       const data = reader.result;
@@ -80,7 +107,10 @@ const getBlob = async (inputText, selectedCharacter) => {
         });
       });
     };
-    reader.readAsDataURL(tmpBlob);
+
+    for(let i=0; i< queryJsons.length; i++){
+      reader.readAsDataURL(tmpBlobs[i]);
+    }
   } catch (error) {
     console.error("Error getting wave:", error);
   }
