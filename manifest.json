@@ -3,7 +3,7 @@
   "manifest_version": 3,
   "version": "0.1.1",
   "description": "A TTS extension for document",
-  "author": "ichikawa aa Dai JDS",
+  "author": "tadokoro aa Dai JDS",
   "permissions": ["activeTab", "scripting", "storage", "contextMenus"],
   "icons": {
 	"48": "images/zunda744.png"

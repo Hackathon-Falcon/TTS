@@ -68,6 +68,11 @@ const createVoice = async (queryJson, selectedCharacter) => {
 //wavを取得する関数
 const getBlob = async (inputText, selectedCharacter) => {
   try {
+    const LIMIT= 150;
+    if(inputText.length > LIMIT){
+      return null;
+    }
+
     const queryJson = await createQuery(inputText, selectedCharacter);
     const tmpBlob = await createVoice(queryJson, selectedCharacter);
     var reader = new FileReader();
@@ -113,7 +118,13 @@ chrome.contextMenus.onClicked.addListener(function (info, tab, tabId) {
 
     selectedText = info.selectionText;
     console.log("selectedText", selectedText);
-    getBlob(selectedText, selectedCharacter);
+    let text_len = getBlob(selectedText, selectedCharacter);
+    
+    if (text_len == null) {
+      // senErrMSG();
+      // console.log("its is null");
+    }
+
     return true;
   }
 });
