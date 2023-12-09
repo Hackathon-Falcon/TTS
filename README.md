@@ -8,3 +8,6 @@
 
 ## Chrome拡張機能を追加 //Add chrome extension
 https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world
+
+## server status
+https://zundamonserver.ngrok.io/
