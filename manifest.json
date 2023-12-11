@@ -4,7 +4,7 @@
   "version": "0.1.1",
   "description": "A TTS extension for document",
   "author": "tadokoro aa Dai JDS",
-  "permissions": ["activeTab", "scripting", "storage", "contextMenus"],
+  "permissions": ["scripting", "storage", "contextMenus"],
   "icons": {
 	"48": "images/zunda744.png"
   },

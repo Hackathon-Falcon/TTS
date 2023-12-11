@@ -25,7 +25,7 @@ const createQuery = async (inputText, selectedCharacter) => {
     }
 
     const data = await response.json();
-    console.log("response1", data);
+    // console.log("response1", data);
 
     return data;
   } catch (error) {
@@ -57,7 +57,7 @@ const createVoice = async (queryJson, selectedCharacter) => {
     }
 
     const data = await response.blob();
-    console.log("response2", data);
+    // console.log("response2", data);
 
     return data;
   } catch (error) {
@@ -68,7 +68,7 @@ const createVoice = async (queryJson, selectedCharacter) => {
 //wavを取得する関数
 const getBlob = async (inputText, selectedCharacter) => {
   try {
-    const LIMIT= 150;
+    const LIMIT= 200;
     if(inputText.length > LIMIT){
       return null;
     }
